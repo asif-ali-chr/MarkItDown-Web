@@ -72,7 +72,7 @@ export default function App() {
     <main className="app">
       <h1>MarkItDown in your browser</h1>
       <p className="sub">
-        Files never leave your device. Conversion runs locally with Python (Pyodide) + Microsoft MarkItDown.
+        Files never leave your device. Conversion runs locally with Microsoft MarkItDown.
       </p>
 
       {fatal ? (
