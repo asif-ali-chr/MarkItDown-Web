@@ -57,28 +57,28 @@ async function pipInstall(spec: string, deps: boolean): Promise<string | null> {
 }
 
 async function init() {
-  post({ type: 'status', text: 'Downloading Python runtime…' })
+  post({ type: 'status', text: 'Wait...converter is loading' })
   pyodide = await loadPyodide({
     indexURL: `https://cdn.jsdelivr.net/pyodide/v${version}/full/`,
   })
 
-  post({ type: 'status', text: 'Loading native packages (lxml, pandas…)' })
+  post({ type: 'status', text: 'Wait...converter is loading' })
   await pyodide.loadPackage(PYODIDE_PKGS)
 
   // markitdown itself: deps=False so micropip does NOT try to pull magika/onnxruntime.
-  post({ type: 'status', text: 'Installing markitdown…' })
+  post({ type: 'status', text: 'Wait...converter is loading' })
   const fatal = await pipInstall('markitdown==0.1.9', false)
   if (fatal) throw new Error(fatal)
 
   const warnings: string[] = []
   for (const pkg of PYPI_PKGS) {
-    post({ type: 'status', text: `Installing ${pkg}…` })
+    post({ type: 'status', text: `Wait...converter is loading` })
     const err = await pipInstall(pkg, true)
     if (err) warnings.push(err)
   }
   // pdfplumber hard-requires pypdfium2 (no WASM wheel). markitdown only needs
   // its table/text API, so install it without deps; pdfminer.six + pillow are already present.
-  post({ type: 'status', text: 'Installing pdfplumber…' })
+  post({ type: 'status', text: 'Wait...converter is loading' })
   const pl = await pipInstall('pdfplumber', false)
   if (pl) warnings.push(pl)
 
